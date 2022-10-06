@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<script>
+     function a(){
+      $.ajax({
+        url: "/wishlist/ajax/",
+        method: "POST",
+        headers: {
+          "X-CSRFToken": getCookie("csrftoken")
+        },
+        data:{
+          judul : $('#judul').val(),
+        description : $("#description").val(),
+        harga : $("#harga").val(),
+        },
+      success: function(){
+        b();
+      },
+      error: function(){
+        aler("error");
+      }
+    })}
+
+    <div class="card-body">
+            <div>    
+                        <a class="text-decoration-none text-dark">Title</a>
+                        <input type="text" id="judul" name="judul" placeholder="Title." class="form-control">
+                    
+                        <a class="text-decoration-none text-dark">Harga</a>
+                        <input type="number" id="harga" name="harga" class="form-control">
+                            
+                        <a class="text-decoration-none text-dark">Description</a>
+                        <input type="text" id="description" name="description" placeholder="Description." class="form-control">
+    
+                        <div class="div d-flex justify-content-center mt-3">
+                        <button class="btn btn-success"  onclick="a()">Create</button>
+                        </div>
+                
+            </div>
+        </div>
+
+    
+    
+    </script>
+{% endblock meta %}
+
+{% block content %}
+
+{% load static %}
+
+  
+  <nav class="navbar navbar-dark bg-primary">
+<b>{{nama}}</b>
+    <button type="button" class="btn btn-secondary"><a href="{% url 'wishlist:logout' %}">Logout</a></button>
+  </nav>
+
+
+
+
+
+<h5>Sesi terakhir login: {{ last_login }}</h5>
+{% endblock content %}
+
